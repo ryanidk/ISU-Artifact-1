@@ -11,3 +11,4 @@ Written in Python + Flask, and frontend UI is simple HTML/CSS/JS. Run using Guni
  - [ ] Add formulas for each shape
  - [ ] Add visualizers for each shape
  - [ ] Fix bugs
+ - [ ] Make a quiz/game for the user to test their knowledge??
