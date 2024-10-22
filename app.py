@@ -1,9 +1,11 @@
 from flask import Flask, request, render_template
 import math
 from groq import Groq
+import os
 
 # Flask app setup
 app = Flask(__name__)
+groq_api_key = os.getenv('GROQ_API_KEY')
 groq_client = Groq()
 
 
