@@ -159,56 +159,56 @@
                 const shape = document.getElementById('shape-' + category).value;
                 switch (shape) {
                     case 'circle':
-                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
+                        inputs += '<label for="radius">Radius:</label><input type="number" step="any" name="radius" required>';
                         break;
                     case 'triangle':
                         if (calculationType === 'area') {
-                            inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
-                            inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                            inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
+                            inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         } else {
-                            inputs += '<label for="side1">Side 1:</label><input type="number" name="side1" required>';
-                            inputs += '<label for="side2">Side 2:</label><input type="number" name="side2" required>';
-                            inputs += '<label for="side3">Side 3:</label><input type="number" name="side3" required>';
+                            inputs += '<label for="side1">Side 1:</label><input type="number" step="any" name="side1" required>';
+                            inputs += '<label for="side2">Side 2:</label><input type="number" step="any" name="side2" required>';
+                            inputs += '<label for="side3">Side 3:</label><input type="number" step="any" name="side3" required>';
                         }
                         break;
                     case 'rectangle':
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
-                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="width">Width:</label><input type="number" step="any" name="width" required>';
                         break;
                     case 'square':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         break;
                     case 'trapezium':
-                        inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
-                        inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
+                        inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         if (calculationType === 'perimeter') {
-                            inputs += '<label for="c">Side C:</label><input type="number" name="c" required>';
-                            inputs += '<label for="d">Side D:</label><input type="number" name="d" required>';
+                            inputs += '<label for="c">Side C:</label><input type="number" step="any" name="c" required>';
+                            inputs += '<label for="d">Side D:</label><input type="number" step="any" name="d" required>';
                         }
                         break;
                     case 'parallelogram':
-                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         if (calculationType === 'perimeter') {
-                            inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                            inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         }
                         break;
                     case 'rhombus':
                         if (calculationType === 'area') {
-                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
-                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
+                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
+                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
                         } else {
-                            inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                            inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         }
                         break;
                     case 'kite':
                         if (calculationType === 'area') {
-                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
-                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
+                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
+                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
                         } else {
-                            inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
-                            inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                            inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
+                            inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
                         }
                         break;
 
@@ -218,62 +218,62 @@
                     case 'octagon':
                     case 'nonagon':
                     case 'decagon':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         break;
                 }
             } else if (category === '3d') {
                 const shape = document.getElementById('shape-' + category).value;
                 switch (shape) {
                     case 'cube':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         break;
                     case 'cylinder':
-                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="radius">Radius:</label><input type="number" step="any" name="radius" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'cone':
-                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="radius">Radius:</label><input type="number" step="any" name="radius" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'trianglePrism':
-                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'rectanglePrism':
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
-                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="width">Width:</label><input type="number" step="any" name="width" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'rhombusPrism':
-                        inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
-                        inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
+                        inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'trapeziumPrism':
-                        inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
-                        inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
+                        inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'parallelogramPrism':
-                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'trianglePyramid':
-                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'rectanglePyramid':
-                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="width">Width:</label><input type="number" step="any" name="width" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'squarePyramid':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'pentagonPrism':
                     case 'hexagonPrism':
@@ -281,22 +281,22 @@
                     case 'octagonPrism':
                     case 'nonagonPrism':
                     case 'decagonPrism':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'pentagonPyramid':
                     case 'hexagonPyramid':
-                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                 }
             } else if (category === 'pythagorean') {
                 if (calculationType === 'hypotenuse') {
-                    inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
-                    inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                    inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
+                    inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
                 } else {
-                    inputs += '<label for="hypotenuse">Hypotenuse:</label><input type="number" name="hypotenuse" required>';
-                    inputs += '<label for="side">Known Side:</label><input type="number" name="side" required>';
+                    inputs += '<label for="hypotenuse">Hypotenuse:</label><input type="number" step="any" name="hypotenuse" required>';
+                    inputs += '<label for="side">Known Side:</label><input type="number" step="any" name="side" required>';
                 }
             }
 
