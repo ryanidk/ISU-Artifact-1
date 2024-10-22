@@ -7,5 +7,4 @@ Written in Python + Flask, and frontend UI is simple HTML/CSS/JS. Run using Guni
 ## TODO
  - [ ] Add formulas for each shape
  - [ ] Add visualizers for each shape
- - [ ] Add explanation feature (llm?)
  - [ ] Fix bugs

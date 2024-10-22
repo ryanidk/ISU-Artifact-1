@@ -314,7 +314,8 @@
                 .then(response => response.text())
                 .then(text => {
                     const resultDiv = document.querySelector('.result');
-                    resultDiv.innerHTML = `<p>${text}</p>`;
+                    const formattedText = text.replace(/\n/g, '<br>');
+                    resultDiv.innerHTML = formattedText;
                     resultDiv.classList.remove('hidden');
                 })
                 .catch(error => {
@@ -432,6 +433,7 @@
         <p></p>
     </div>
 
+    <p>Disclaimer: The AI-generated explanations may contain inaccuracies or misleading details. Please verify important information through additional sources.</p>
     <p>Ryan L 2024</p>
 
 </div>

@@ -1,8 +1,10 @@
 from flask import Flask, request, render_template
 import math
+from groq import Groq
 
 # Flask app setup
 app = Flask(__name__)
+groq_client = Groq()
 
 
 def round_4(value):
@@ -286,6 +288,48 @@ def index():
                     side = float(request.form['side'])
                     other_side = math.sqrt(hypotenuse ** 2 - side ** 2)
                     result = f"Other Side: {round_4(other_side)}"
+
+            # ai explanation
+            if request.form.get('category') == 'pythagorean':
+                completion = groq_client.chat.completions.create(
+                    model="llama-3.1-8b-instant",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a right triangle using the Pythagorean theorem. You shall not output markdown, like **, __, ||, etc."
+                        },
+                        {
+                            "role": "user",
+                            "content": f"Explain how to determine the {calculation_type} of a right triangle using the Pythagorean theorem."
+                        }
+                    ],
+                    temperature=0.7,
+                    max_tokens=1024,
+                    top_p=1,
+                    stream=False,
+                    stop=None,
+                )
+            else:
+                completion = groq_client.chat.completions.create(
+                    model="llama-3.1-8b-instant",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a {shape}. You shall not output markdown, like **, __, ||, etc."
+                        },
+                        {
+                            "role": "user",
+                            "content": f"Explain how to determine the {calculation_type} of a {shape}."
+                        }
+                    ],
+                    temperature=0.7,
+                    max_tokens=1024,
+                    top_p=1,
+                    stream=False,
+                    stop=None,
+                )
+            msg = completion.choices[0].message.content
+            result += f"\n\nAI Explanation:\n{msg}"
 
         except Exception as e:
             result = f"Error in calculation: {e}"
