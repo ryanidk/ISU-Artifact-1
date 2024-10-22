@@ -1,13 +1,418 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ISU Artifact 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISU Artifact 1 - Shape Calculator</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        .menu {
+            background-color: #3498db;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .menu a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .menu a:hover {
+            background-color: #2980b9;
+        }
+
+        .section {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #34495e;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #442c50;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: 'Open Sans', sans-serif;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f5e9;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+
+    <script>
+        function showSection(sectionId, clear = true) {
+            document.getElementById('2d-shapes').style.display = 'none';
+            document.getElementById('3d-shapes').style.display = 'none';
+            document.getElementById('pythagorean-theorem').style.display = 'none';
+
+            document.getElementById(sectionId).style.display = 'block';
+            if (clear) clearResult();
+
+            if (sectionId === '2d-shapes') {
+                updateInputs('2d', clear);
+            } else if (sectionId === '3d-shapes') {
+                updateInputs('3d', clear);
+            } else if (sectionId === 'pythagorean-theorem') {
+                updateInputs('pythagorean', clear);
+            }
+        }
+
+        function updateInputs(category) {
+            const calculationType = document.getElementById('calculation_type-' + category).value;
+            let inputs = '';
+
+            if (category === '2d') {
+                const shape = document.getElementById('shape-' + category).value;
+                switch (shape) {
+                    case 'circle':
+                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
+                        break;
+                    case 'triangle':
+                        if (calculationType === 'area') {
+                            inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
+                            inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        } else {
+                            inputs += '<label for="side1">Side 1:</label><input type="number" name="side1" required>';
+                            inputs += '<label for="side2">Side 2:</label><input type="number" name="side2" required>';
+                            inputs += '<label for="side3">Side 3:</label><input type="number" name="side3" required>';
+                        }
+                        break;
+                    case 'rectangle':
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
+                        break;
+                    case 'square':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        break;
+                    case 'trapezium':
+                        inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
+                        inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        if (calculationType === 'perimeter') {
+                            inputs += '<label for="c">Side C:</label><input type="number" name="c" required>';
+                            inputs += '<label for="d">Side D:</label><input type="number" name="d" required>';
+                        }
+                        break;
+                    case 'parallelogram':
+                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        if (calculationType === 'perimeter') {
+                            inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        }
+                        break;
+                    case 'rhombus':
+                        if (calculationType === 'area') {
+                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
+                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
+                        } else {
+                            inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        }
+                        break;
+                    case 'kite':
+                        if (calculationType === 'area') {
+                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
+                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
+                        } else {
+                            inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
+                            inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                        }
+                        break;
+
+                    case 'pentagon':
+                    case 'hexagon':
+                    case 'heptagon':
+                    case 'octagon':
+                    case 'nonagon':
+                    case 'decagon':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        break;
+                }
+            } else if (category === '3d') {
+                const shape = document.getElementById('shape-' + category).value;
+                switch (shape) {
+                    case 'cube':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        break;
+                    case 'cylinder':
+                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'cone':
+                        inputs += '<label for="radius">Radius:</label><input type="number" name="radius" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'trianglePrism':
+                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        break;
+                    case 'rectanglePrism':
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'rhombusPrism':
+                        inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" name="p" required>';
+                        inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" name="q" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'trapeziumPrism':
+                        inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
+                        inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        break;
+                    case 'parallelogramPrism':
+                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        break;
+                    case 'trianglePyramid':
+                        inputs += '<label for="base">Base:</label><input type="number" name="base" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        break;
+                    case 'rectanglePyramid':
+                        inputs += '<label for="width">Width:</label><input type="number" name="width" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        inputs += '<label for="length">Length:</label><input type="number" name="length" required>';
+                        break;
+                    case 'squarePyramid':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'pentagonPrism':
+                    case 'hexagonPrism':
+                    case 'heptagonPrism':
+                    case 'octagonPrism':
+                    case 'nonagonPrism':
+                    case 'decagonPrism':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                    case 'pentagonPyramid':
+                    case 'hexagonPyramid':
+                        inputs += '<label for="side">Side:</label><input type="number" name="side" required>';
+                        inputs += '<label for="height">Height:</label><input type="number" name="height" required>';
+                        break;
+                }
+            } else if (category === 'pythagorean') {
+                if (calculationType === 'hypotenuse') {
+                    inputs += '<label for="a">Side A:</label><input type="number" name="a" required>';
+                    inputs += '<label for="b">Side B:</label><input type="number" name="b" required>';
+                } else {
+                    inputs += '<label for="hypotenuse">Hypotenuse:</label><input type="number" name="hypotenuse" required>';
+                    inputs += '<label for="side">Known Side:</label><input type="number" name="side" required>';
+                }
+            }
+
+            document.getElementById(category + '-inputs').innerHTML = inputs;
+            if (clear) clearResult();
+        }
+
+        function clearResult() {
+            const resultDiv = document.querySelector('.result');
+            if (resultDiv) {
+                resultDiv.classList.add('hidden');
+            }
+        }
+
+        window.onload = function () {
+            showSection('2d-shapes', clear = false);
+        };
+    </script>
 </head>
 <body>
+<div class="container">
+    <h1>ISU Artifact 1 - Shape Calculator</h1>
+    <a href="https://github.com/ryanidk/ISU-Artifact-1"><h3>View Source Code</h3></a>
 
+    <div class="menu">
+        <a href="javascript:void(0);" onclick="showSection('2d-shapes')">2D Shapes</a>
+        <a href="javascript:void(0);" onclick="showSection('3d-shapes')">3D Shapes</a>
+        <a href="javascript:void(0);" onclick="showSection('pythagorean-theorem')">Pythagorean Theorem</a>
+    </div>
+
+    <div id="2d-shapes" class="section">
+        <h2>2D Shapes</h2>
+        <form method="POST">
+            <input type="hidden" name="category" value="2d">
+            <label for="shape-2d">Select Shape:</label>
+            <select name="shape" id="shape-2d" required onchange="updateInputs('2d')">
+                <option value="circle">Circle</option>
+                <option value="triangle">Triangle</option>
+                <option value="rectangle">Rectangle</option>
+                <option value="square">Square</option>
+                <option value="trapezium">Trapezium</option>
+                <option value="parallelogram">Parallelogram</option>
+                <option value="rhombus">Rhombus</option>
+                <option value="kite">Kite</option>
+                <option value="pentagon">Pentagon</option>
+                <option value="hexagon">Hexagon</option>
+                <option value="heptagon">Heptagon</option>
+                <option value="octagon">Octagon</option>
+                <option value="nonagon">Nonagon</option>
+                <option value="decagon">Decagon</option>
+            </select>
+
+            <label for="calculation_type-2d">Calculation Type:</label>
+            <select name="calculation_type" id="calculation_type-2d" required onchange="updateInputs('2d')">
+                <option value="area">Area</option>
+                <option value="perimeter">Perimeter</option>
+            </select>
+
+            <div id="2d-inputs"></div>
+
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+
+    <div id="3d-shapes" class="section">
+        <h2>3D Shapes</h2>
+        <form method="POST">
+            <input type="hidden" name="category" value="3d">
+            <label for="shape-3d">Select Shape:</label>
+            <select name="shape" id="shape-3d" required onchange="updateInputs('3d')">
+                <option value="cube">Cube</option>
+                <option value="cylinder">Cylinder</option>
+                <option value="cone">Cone</option>
+                <option value="trianglePrism">Triangular Prism</option>
+                <option value="trapeziumPrism">Trapezium Prism</option>
+                <option value="parallelogramPrism">Parallelogram Prism</option>
+                <option value="rectanglePrism">Rectangular Prism</option>
+                <option value="rhombusPrism">Rhombus Prism</option>
+                <option value="pentagonPrism">Pentagonal Prism</option>
+                <option value="hexagonPrism">Hexagonal Prism</option>
+                <option value="heptagonPrism">Heptagonal Prism</option>
+                <option value="octagonPrism">Octagonal Prism</option>
+                <option value="nonagonPrism">Nonagonal Prism</option>
+                <option value="decagonPrism">Decagonal Prism</option>
+                <option value="trianglePyramid">Triangular Pyramid</option>
+                <option value="squarePyramid">Square Pyramid</option>
+                <option value="rectanglePyramid">Rectangular Pyramid</option>
+                <option value="pentagonPyramid">Pentagonal Pyramid</option>
+                <option value="hexagonPyramid">Hexagonal Pyramid</option>
+            </select>
+
+            <label for="calculation_type-3d">Calculation Type:</label>
+            <select name="calculation_type" id="calculation_type-3d" required onchange="updateInputs('3d')">
+                <option value="area">Surface Area</option>
+                <option value="volume">Volume</option>
+            </select>
+
+            <div id="3d-inputs"></div>
+
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+
+    <div id="pythagorean-theorem" class="section">
+        <h2>Pythagorean Theorem Calculator</h2>
+        <form method="POST">
+            <input type="hidden" name="category" value="pythagorean">
+            <label for="calculation_type-pythagorean">Select Calculation:</label>
+            <select name="calculation_type" id="calculation_type-pythagorean" required
+                    onchange="updateInputs('pythagorean')">
+                <option value="hypotenuse">Find Hypotenuse</option>
+                <option value="side">Find Other Side</option>
+            </select>
+
+            <div id="pythagorean-inputs"></div>
+
+            <button type="submit">Calculate</button>
+        </form>
+    </div>
+
+    {% if result %}
+    <div class="result">
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+</div>
 </body>
 </html>
