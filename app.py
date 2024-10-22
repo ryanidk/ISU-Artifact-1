@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 import math
 from groq import Groq
 import os
+import json
 
 # Flask app setup
 app = Flask(__name__)
@@ -21,6 +22,7 @@ def round_4(value):
 @app.route("/", methods=['GET', 'POST'])
 def index():
     result = None
+    ai_explain = None
     if request.method == 'POST':
         try:
             shape = request.form.get('shape')
@@ -331,11 +333,12 @@ def index():
                     stop=None,
                 )
             msg = completion.choices[0].message.content
-            result += f"\n\nAI Explanation:\n{msg}"
+            ai_explain = f"\n\n<b>AI Explanation:</b>\n{msg}"
 
         except Exception as e:
             result = f"Error in calculation: {e}"
-        return result
+            ai_explain = "\n\n<b>AI Explanation:</b>\nNot available"
+        return json.dumps({'result': result, 'explain': ai_explain})
 
     return render_template('index.html')
 

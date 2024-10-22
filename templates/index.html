@@ -119,6 +119,15 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
+        .explanation {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f5e9ee;
+            border-radius: 5px;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
         .hidden {
             display: none;
         }
@@ -297,8 +306,10 @@
 
         function clearResult() {
             const resultDiv = document.querySelector('.result');
-            if (resultDiv) {
+            const explanationDiv = document.querySelector('.explanation');
+            if (resultDiv && explanationDiv) {
                 resultDiv.classList.add('hidden');
+                explanationDiv.classList.add('hidden');
             }
         }
 
@@ -312,11 +323,18 @@
                 body: formData
             })
                 .then(response => response.text())
-                .then(text => {
+                .then(result => {
+                    const arrayResult = JSON.parse(result);
+                    const answer = arrayResult['result']
+                    const explain = arrayResult['explain']
                     const resultDiv = document.querySelector('.result');
-                    const formattedText = text.replace(/\n/g, '<br>');
-                    resultDiv.innerHTML = formattedText;
+                    const explanationDiv = document.querySelector('.explanation');
+                    const answerFormattedText = answer.replace(/\n/g, '<br>');
+                    const explainFormattedText = explain.replace(/\n/g, '<br>');
+                    resultDiv.innerHTML = answerFormattedText;
                     resultDiv.classList.remove('hidden');
+                    explanationDiv.innerHTML = explainFormattedText;
+                    explanationDiv.classList.remove('hidden');
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -430,6 +448,9 @@
     </div>
 
     <div class="result">
+        <p></p>
+    </div>
+    <div class="explanation">
         <p></p>
     </div>
 
