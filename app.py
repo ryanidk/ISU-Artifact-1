@@ -333,11 +333,11 @@ def index():
                     stop=None,
                 )
             msg = completion.choices[0].message.content
-            ai_explain = f"\n\n<b>AI Explanation:</b>\n{msg}"
+            ai_explain = f"<b>AI Explanation:</b>\n{msg}"
 
         except Exception as e:
             result = f"Error in calculation: {e}"
-            ai_explain = "\n\n<b>AI Explanation:</b>\nNot available"
+            ai_explain = "<b>AI Explanation:</b>\nNot available"
         return json.dumps({'result': result, 'explain': ai_explain})
 
     return render_template('index.html')
