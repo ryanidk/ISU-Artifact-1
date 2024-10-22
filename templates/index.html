@@ -125,20 +125,20 @@
     </style>
 
     <script>
-        function showSection(sectionId, clear = true) {
+        function showSection(sectionId) {
             document.getElementById('2d-shapes').style.display = 'none';
             document.getElementById('3d-shapes').style.display = 'none';
             document.getElementById('pythagorean-theorem').style.display = 'none';
 
             document.getElementById(sectionId).style.display = 'block';
-            if (clear) clearResult();
+            clearResult();
 
             if (sectionId === '2d-shapes') {
-                updateInputs('2d', clear);
+                updateInputs('2d');
             } else if (sectionId === '3d-shapes') {
-                updateInputs('3d', clear);
+                updateInputs('3d');
             } else if (sectionId === 'pythagorean-theorem') {
-                updateInputs('pythagorean', clear);
+                updateInputs('pythagorean');
             }
         }
 
@@ -292,7 +292,7 @@
             }
 
             document.getElementById(category + '-inputs').innerHTML = inputs;
-            if (clear) clearResult();
+            clearResult();
         }
 
         function clearResult() {
@@ -302,8 +302,28 @@
             }
         }
 
+        function handleFormSubmission(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    const resultDiv = document.querySelector('.result');
+                    resultDiv.innerHTML = `<p>${text}</p>`;
+                    resultDiv.classList.remove('hidden');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
         window.onload = function () {
-            showSection('2d-shapes', clear = false);
+            showSection('2d-shapes');
         };
     </script>
 </head>
@@ -320,7 +340,7 @@
 
     <div id="2d-shapes" class="section">
         <h2>2D Shapes</h2>
-        <form method="POST">
+        <form onsubmit="handleFormSubmission(event)">
             <input type="hidden" name="category" value="2d">
             <label for="shape-2d">Select Shape:</label>
             <select name="shape" id="shape-2d" required onchange="updateInputs('2d')">
@@ -354,7 +374,7 @@
 
     <div id="3d-shapes" class="section">
         <h2>3D Shapes</h2>
-        <form method="POST">
+        <form onsubmit="handleFormSubmission(event)">
             <input type="hidden" name="category" value="3d">
             <label for="shape-3d">Select Shape:</label>
             <select name="shape" id="shape-3d" required onchange="updateInputs('3d')">
@@ -393,7 +413,7 @@
 
     <div id="pythagorean-theorem" class="section">
         <h2>Pythagorean Theorem Calculator</h2>
-        <form method="POST">
+        <form onsubmit="handleFormSubmission(event)">
             <input type="hidden" name="category" value="pythagorean">
             <label for="calculation_type-pythagorean">Select Calculation:</label>
             <select name="calculation_type" id="calculation_type-pythagorean" required
@@ -408,11 +428,10 @@
         </form>
     </div>
 
-    {% if result %}
     <div class="result">
-        <p>{{ result }}</p>
+        <p></p>
     </div>
-    {% endif %}
+
 </div>
 </body>
 </html>

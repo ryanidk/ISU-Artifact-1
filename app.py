@@ -4,6 +4,7 @@ import math
 # Flask app setup
 app = Flask(__name__)
 
+
 def round_4(value):
     if value.is_integer():
         return f"{int(value)}"
@@ -11,6 +12,7 @@ def round_4(value):
         return f"{value}"
     else:
         return f"~{value:.4f}"
+
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -287,8 +289,10 @@ def index():
 
         except Exception as e:
             result = f"Error in calculation: {e}"
+        return result
 
-    return render_template('index.html', result=result)
+    return render_template('index.html')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
