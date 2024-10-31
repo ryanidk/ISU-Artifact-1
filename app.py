@@ -300,7 +300,6 @@ def index():
                     case "trianglePyramid":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
-                        length = float(request.form['length'])
                         if calculation_type == 'area':
                             result = f"Surface Area: {round_4((math.sqrt(3) / 4) * side**2 + (3 / 2) * side * math.sqrt((math.sqrt(3) / 6 * side)**2 + height**2))}"
                             result += "\nFormula: (√3 / 4) * side² + (3 / 2) * side * √((√3 / 6 * side)² + height²)"
