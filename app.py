@@ -188,7 +188,7 @@ def index():
                             result += "\nFormula: πr(r + √(r² + h²))"
                         elif calculation_type == 'volume':
                             result = f"Volume: {round_4(math.pi * radius ** 2 * height / 3)}"
-                            result += "\nFormula: πr²h/3"
+                            result += "\nFormula: (πr²h)/3"
                     case "trianglePrism":
                         base = float(request.form['base'])
                         height = float(request.form['height'])
@@ -197,8 +197,8 @@ def index():
                             result = f"Surface Area: {round_4(base * height + 3 * base * length)}"
                             result += "\nFormula: base * height + 3 * base * length"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(base * height * length)}"
-                            result += "\nFormula: base * height * length"
+                            result = f"Volume: {round_4(0.5 * base * height * length)}"
+                            result += "\nFormula: 0.5 * base * height * length"
                     case "trapeziumPrism":
                         a = float(request.form['a'])
                         b = float(request.form['b'])
@@ -215,8 +215,9 @@ def index():
                         height = float(request.form['height'])
                         length = float(request.form['length'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(2 * (base * height + base * length))}"
-                            result += "\nFormula: 2 * (base * height + base * length)"
+                            side = float(request.form['side'])
+                            result = f"Surface Area: {round_4(2 * (base * height + base * length + length * side))}"
+                            result += "\nFormula: 2 * (base * height + base * length + length * side)"
                         elif calculation_type == 'volume':
                             result = f"Volume: {round_4(base * height * length)}"
                             result += "\nFormula: base * height * length"
@@ -233,20 +234,19 @@ def index():
                     case "rhombusPrism":
                         p = float(request.form['p'])
                         q = float(request.form['q'])
-                        h = float(request.form['h'])
                         length = float(request.form['length'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(2 * (p * q + p * length + q * length))}"
-                            result += "\nFormula: 2 * (p * q + p * length + q * length)"
+                            result = f"Surface Area: {round_4(p * q + 2 * math.sqrt(p**2 + q**2) * length)}"
+                            result += "\nFormula:  p * q + 2 * √(p² + q²) * length"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(p * q * h)}"
-                            result += "\nFormula: p * q * h"
+                            result = f"Volume: {round_4((p * q * length) / 2)}"
+                            result += "\nFormula: (p × q × length) / 2"
                     case "pentagonPrism":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(5 * side ** 2 + 5 * side * height)}"
-                            result += "\nFormula: 5 * side² + 5 * side * height"
+                            result = f"Surface Area: {round_4(2 * (5 * side**2 / 4) * math.sqrt(2 * math.sqrt(5) / 5 + 1) + 5 * side * height)}"
+                            result += "\nFormula: 2 * (5 * side² / 4) * √(2√5/5 + 1) + 5 * side * height"
                         elif calculation_type == 'volume':
                             result = f"Volume: {round_4(2.5 * side ** 2 * height * math.sqrt(5 + 2 * math.sqrt(5)))}"
                             result += "\nFormula: 2.5 * side² * height * √(5 + 2√5)"
@@ -254,75 +254,75 @@ def index():
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(6 * side ** 2 + 6 * side * height)}"
-                            result += "\nFormula: 6 * side² + 6 * side * height"
+                            result = f"Surface Area: {round_4(3 * math.sqrt(3) * side**2 + 6 * side * height)}"
+                            result += "\nFormula: 3√3 * side² + 6 * side * height"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(3 * side ** 2 * height * math.sqrt(3))}"
-                            result += "\nFormula: 3 * side² * height * √3"
+                            result = f"Volume: {round_4((3 * math.sqrt(3) / 2) * side**2 * height)}"
+                            result += "\nFormula: (3√3 / 2) * side² * height"
                     case "heptagonPrism":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(7 * side ** 2 + 7 * side * height)}"
-                            result += "\nFormula: 7 * side² + 7 * side * height"
+                            result = f"Surface Area: {round_4((7 / 2) * side**2 * math.sqrt((7 + 3 * math.sqrt(7)) / 4) + 7 * side * height)}"
+                            result += "\nFormula: (7/2) * side² * √((7 + 3√7)/4) + 7 * side * height"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(3.5 * side ** 2 * height * math.sqrt(3 + 2 * math.sqrt(5)))}"
-                            result += "\nFormula: 3.5 * side² * height * √(3 + 2√5)"
+                            result = f"Volume: {round_4((7 / 4) * side**2 * math.sqrt((7 + 3 * math.sqrt(7)) / 4) * height)}"
+                            result += "\nFormula: (7/4) * side² * √((7 + 3√7)/4) * height"
                     case "octagonPrism":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(8 * side ** 2 + 8 * side * height)}"
-                            result += "\nFormula: 8 * side² + 8 * side * height"
+                            result = f"Surface Area: {round_4(4 * (1 + math.sqrt(2)) * side**2 + 8 * side * height)}"
+                            result += "\nFormula: 4 * (1 + √2) * side² + 8 * side * height"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(4 * side ** 2 * height * math.sqrt(2 + math.sqrt(2)))}"
-                            result += "\nFormula: 4 * side² * height * √(2 + √2)"
+                            result = f"Volume: {round_4(2 * (1 + math.sqrt(2)) * side**2 * height)}"
+                            result += "\nFormula: 2 * (1 + √2) * side² * height"
                     case "nonagonPrism":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(9 * side ** 2 + 9 * side * height)}"
-                            result += "\nFormula: 9 * side² + 9 * side * height"
+                            result = f"Surface Area: {round_4((9 / 2) * side**2 * math.sqrt((9 + 2 * math.sqrt(3) * math.sqrt(27)) / 3) + 9 * side * height)}"
+                            result += "\nFormula: (9/2) * side² * √((9 + 2√3 * √27) / 3) + 9 * side * height"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(4.5 * side ** 2 * height * math.sqrt(4 - 2 * math.sqrt(3)))}"
-                            result += "\nFormula: 4.5 * side² * height * √(4 - 2√3)"
+                            result = f"Volume: {round_4((9 / 4) * side**2 * math.sqrt((9 + 2 * math.sqrt(3) * math.sqrt(27)) / 3) * height)}"
+                            result += "\nFormula: (9/4) * side² * √((9 + 2√3 * √27) / 3) * height"
                     case "decagonPrism":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(10 * side ** 2 + 10 * side * height)}"
-                            result += "\nFormula: 10 * side² + 10 * side * height"
+                            result = f"Surface Area: {round_4(5 * side**2 * math.sqrt(5 + 2 * math.sqrt(5)) + 10 * side * height)}"
+                            result += "\nFormula: 5 * side² * √(5 + 2√5) + 10 * side * height"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(5 * side ** 2 * height * math.sqrt(5 + 2 * math.sqrt(5)))}"
-                            result += "\nFormula: 5 * side² * height * √(5 + 2√5)"
+                            result = f"Volume: {round_4((5 / 2) * side**2 * math.sqrt(5 + 2 * math.sqrt(5)) * height)}"
+                            result += "\nFormula: (5/2) * side² * √(5 + 2√5) * height"
 
                     # pyramids
                     case "trianglePyramid":
-                        base = float(request.form['base'])
+                        side = float(request.form['side'])
                         height = float(request.form['height'])
                         length = float(request.form['length'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(base * height + 3 * 0.5 * base * length)}"
-                            result += "\nFormula: base * height + 3 * 0.5 * base * length"
+                            result = f"Surface Area: {round_4((math.sqrt(3) / 4) * side**2 + (3 / 2) * side * math.sqrt((math.sqrt(3) / 6 * side)**2 + height**2))}"
+                            result += "\nFormula: (√3 / 4) * side² + (3 / 2) * side * √((√3 / 6 * side)² + height²)"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(0.5 * base * height * length / 3)}"
-                            result += "\nFormula: 0.5 * base * height * length / 3"
+                            result = f"Volume: {round_4((math.sqrt(3) / 4) * side**2 + (3 / 2) * side * math.sqrt((math.sqrt(3) / 6 * side)**2 + height**2))}"
+                            result += "\nFormula: (√3 / 12) * side² * height"
                     case "rectanglePyramid":
                         width = float(request.form['width'])
                         height = float(request.form['height'])
                         length = float(request.form['length'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(width * height + 2 * 0.5 * width * length)}"
-                            result += "\nFormula: width * height + 2 * 0.5 * width * length"
+                            result = f"Surface Area: {round_4(width * length + width * math.sqrt((length / 2)**2 + height**2) + length * math.sqrt((width / 2)**2 + height**2))}"
+                            result += "\nFormula: width * length + width * √((length / 2)² + height²) + length * √((width / 2)² + height²)"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(width * height * length / 3)}"
-                            result += "\nFormula: width * height * length / 3"
+                            result = f"Volume: {round_4((width * height * length) / 3)}"
+                            result += "\nFormula: (width * height * length) / 3"
                     case "squarePyramid":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(side ** 2 + 2 * 0.5 * side * height)}"
-                            result += "\nFormula: side² + 2 * 0.5 * side * height"
+                            result = f"Surface Area: {round_4(side**2 + 2 * side * math.sqrt((side / 2)**2 + height**2))}"
+                            result += "\nFormula: side² + 2 * side * √((side / 2)² + height²)"
                         elif calculation_type == 'volume':
                             result = f"Volume: {round_4(side ** 2 * height / 3)}"
                             result += "\nFormula: side² * height / 3"
@@ -330,20 +330,20 @@ def index():
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(5 * side ** 2 + 5 * 0.5 * side * height)}"
-                            result += "\nFormula: 5 * side² + 5 * 0.5 * side * height"
+                            result = f"Surface Area: {round_4((5/4) * side**2 * math.sqrt(5 + 2 * math.sqrt(5)) + (5/2) * side * math.sqrt((side / (2 * math.tan(math.pi / 5)))**2 + height**2))}"
+                            result += "\nFormula: (5/4) * side² * √(5 + 2√5) + (5/2) * side * √((side / (2 * tan(π / 5)))² + height²)"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(5 * side ** 2 * height / 3)}"
-                            result += "\nFormula: 5 * side² * height / 3"
+                            result = f"Volume: {round_4((5/12) * side**2 * math.sqrt(5 + 2 * math.sqrt(5)) * height)}"
+                            result += "\nFormula: (5/12) * side² * √(5 + 2√5) * height"
                     case "hexagonPyramid":
                         side = float(request.form['side'])
                         height = float(request.form['height'])
                         if calculation_type == 'area':
-                            result = f"Surface Area: {round_4(6 * side ** 2 + 6 * 0.5 * side * height)}"
-                            result += "\nFormula: 6 * side² + 6 * 0.5 * side * height"
+                            result = f"Surface Area: {round_4((3 * math.sqrt(3) / 2) * side**2 + 3 * side * math.sqrt((math.sqrt(3) / 2 * side)**2 + height**2))}"
+                            result += "\nFormula: (3√3 / 2) * side² + 3 * side * √((√3 / 2 * side)² + height²)"
                         elif calculation_type == 'volume':
-                            result = f"Volume: {round_4(6 * side ** 2 * height / 3)}"
-                            result += "\nFormula: 6 * side² * height / 3"
+                            result = f"Volume: {round_4((math.sqrt(3) / 2) * side**2 * height)}"
+                            result += "\nFormula: (√3 / 2) * side² * height"
 
             # Pythagorean theorem calculator
             elif request.form.get('category') == 'pythagorean':

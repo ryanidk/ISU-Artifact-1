@@ -184,12 +184,12 @@
                         inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         break;
                     case 'trapezium':
-                        inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
-                        inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
+                        inputs += '<label for="a">Side A (Base):</label><input type="number" step="any" name="a" required>';
+                        inputs += '<label for="b">Side B (Base):</label><input type="number" step="any" name="b" required>';
                         inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         if (calculationType === 'perimeter') {
-                            inputs += '<label for="c">Side C:</label><input type="number" step="any" name="c" required>';
-                            inputs += '<label for="d">Side D:</label><input type="number" step="any" name="d" required>';
+                            inputs += '<label for="c">Side C (Side):</label><input type="number" step="any" name="c" required>';
+                            inputs += '<label for="d">Side D (Side):</label><input type="number" step="any" name="d" required>';
                         }
                         break;
                     case 'parallelogram':
@@ -201,16 +201,16 @@
                         break;
                     case 'rhombus':
                         if (calculationType === 'area') {
-                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
-                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
+                            inputs += '<label for="p">Side P (Diagonal 1):</label><input type="number" step="any" name="p" required>';
+                            inputs += '<label for="q">Side Q (Diagonal 2):</label><input type="number" step="any" name="q" required>';
                         } else {
                             inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
                         }
                         break;
                     case 'kite':
                         if (calculationType === 'area') {
-                            inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
-                            inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
+                            inputs += '<label for="p">Side P (Diagonal 1):</label><input type="number" step="any" name="p" required>';
+                            inputs += '<label for="q">Side Q (Diagonal 2):</label><input type="number" step="any" name="q" required>';
                         } else {
                             inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
                             inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
@@ -241,9 +241,9 @@
                         inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'trianglePrism':
-                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="base">Base (of triangle):</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height (of triangle):</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length (of prism):</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'rectanglePrism':
                         inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
@@ -251,34 +251,37 @@
                         inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'rhombusPrism':
-                        inputs += '<label for="p">Diagonal 1 (p):</label><input type="number" step="any" name="p" required>';
-                        inputs += '<label for="q">Diagonal 2 (q):</label><input type="number" step="any" name="q" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="p">Side P (Diagonal 1 of rhombus):</label><input type="number" step="any" name="p" required>';
+                        inputs += '<label for="q">Side Q (Diagonal 2 of rhombus):</label><input type="number" step="any" name="q" required>';
+                        inputs += '<label for="length">Length (of prism):</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'trapeziumPrism':
-                        inputs += '<label for="a">Side A:</label><input type="number" step="any" name="a" required>';
-                        inputs += '<label for="b">Side B:</label><input type="number" step="any" name="b" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="a">Side A (base of trapezoid):</label><input type="number" step="any" name="a" required>';
+                        inputs += '<label for="b">Side B (base of trapezoid):</label><input type="number" step="any" name="b" required>';
+                        inputs += '<label for="height">Height (of trapezoid):</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length (of prism):</label><input type="number" step="any" name="length" required>';
                         break;
                     case 'parallelogramPrism':
-                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="base">Base (of parallelogram):</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height (of parallelogram):</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="length">Length (of prism):</label><input type="number" step="any" name="length" required>';
+                        if (calculationType === 'area') {
+                            inputs += '<label for="side">Side (of prism):</label><input type="number" step="any" name="side" required>';
+                        }
                         break;
                     case 'trianglePyramid':
-                        inputs += '<label for="base">Base:</label><input type="number" step="any" name="base" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="side">Side (of triangle base):</label><input type="number" step="any" name="base" required>';
+                        inputs += '<label for="height">Height (of pyramid):</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'rectanglePyramid':
-                        inputs += '<label for="width">Width:</label><input type="number" step="any" name="width" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
-                        inputs += '<label for="length">Length:</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="width">Width (of rectangle):</label><input type="number" step="any" name="width" required>';
+                        inputs += '<label for="length">Length (of rectangle):</label><input type="number" step="any" name="length" required>';
+                        inputs += '<label for="height">Height (of pyramid):</label><input type="number" step="any" name="height" required>';
+
                         break;
                     case 'squarePyramid':
-                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="side">Side (of square):</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height (of pyramid):</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'pentagonPrism':
                     case 'hexagonPrism':
@@ -286,13 +289,13 @@
                     case 'octagonPrism':
                     case 'nonagonPrism':
                     case 'decagonPrism':
-                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="side">Side (of base shape):</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height (of prism):</label><input type="number" step="any" name="height" required>';
                         break;
                     case 'pentagonPyramid':
                     case 'hexagonPyramid':
-                        inputs += '<label for="side">Side:</label><input type="number" step="any" name="side" required>';
-                        inputs += '<label for="height">Height:</label><input type="number" step="any" name="height" required>';
+                        inputs += '<label for="side">Side (of base shape):</label><input type="number" step="any" name="side" required>';
+                        inputs += '<label for="height">Height (of pyramid):</label><input type="number" step="any" name="height" required>';
                         break;
                 }
             } else if (category === 'pythagorean') {
@@ -405,7 +408,7 @@
                 <option value="cube">Cube</option>
                 <option value="cylinder">Cylinder</option>
                 <option value="cone">Cone</option>
-                <option value="trianglePrism">Triangular Prism</option>
+                <option value="trianglePrism">Triangular Prism (equilateral or isoceles triangle)</option>
                 <option value="trapeziumPrism">Trapezium Prism</option>
                 <option value="parallelogramPrism">Parallelogram Prism</option>
                 <option value="rectanglePrism">Rectangular Prism</option>
@@ -416,7 +419,7 @@
                 <option value="octagonPrism">Octagonal Prism</option>
                 <option value="nonagonPrism">Nonagonal Prism</option>
                 <option value="decagonPrism">Decagonal Prism</option>
-                <option value="trianglePyramid">Triangular Pyramid</option>
+                <option value="trianglePyramid">Triangular Pyramid (equilateral triangle base)</option>
                 <option value="squarePyramid">Square Pyramid</option>
                 <option value="rectanglePyramid">Rectangular Pyramid</option>
                 <option value="pentagonPyramid">Pentagonal Pyramid</option>
