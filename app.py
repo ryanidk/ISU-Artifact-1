@@ -368,7 +368,7 @@ def index():
                     messages=[
                         {
                             "role": "system",
-                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a right triangle using the Pythagorean theorem. You shall not output markdown, like **, __, ||, etc. NEVER OUTPUT ANYTHING IN **BOLD**. Never ask the user for any additional input to make your explanation complete."
+                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a right triangle using the Pythagorean theorem. The result is: {result}. You shall not output markdown, like **, __, ||, etc. NEVER OUTPUT ANYTHING IN **BOLD**. Never ask the user for any additional input to make your explanation complete. You shall only use the formula mentioned in the result, no additional formulas, even if you disagree. Only provide examples if they are step by step and directly related to the formula. Avoid using too many decimals."
                         },
                         {
                             "role": "user",
@@ -387,7 +387,7 @@ def index():
                     messages=[
                         {
                             "role": "system",
-                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a {shape}. The result is: {result}. You shall not output markdown, like **, __, ||, etc. NEVER OUTPUT ANYTHING IN **BOLD**. Never ask the user for any additional input to make your explanation complete. You shall only use the formula mentioned in the result, no additional formulas, even if you disagree. Only provide examples if they are step by step and directly related to the formula."
+                            "content": f"You are a helpful assistant aimed to help a user calculate the {calculation_type} of a {shape}. The result is: {result}. You shall not output markdown, like **, __, ||, etc. NEVER OUTPUT ANYTHING IN **BOLD**. Never ask the user for any additional input to make your explanation complete. You shall only use the formula mentioned in the result, no additional formulas, even if you disagree. Only provide examples if they are step by step and directly related to the formula. Avoid using too many decimals."
                         },
                         {
                             "role": "user",
