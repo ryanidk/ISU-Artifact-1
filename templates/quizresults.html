@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Results</title>
+
+    <link rel="stylesheet" href="https://use.typekit.net/cgs2wwr.css">
+
+    <style>
+        body {
+            font-family: "proxima-nova", sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #2c3e50;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.5rem;
+            color: #442c50;
+        }
+
+        .score {
+            background: rgba(255, 255, 255, 0.73);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-result-incorrect {
+            background: #f5e9ee;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-result-correct {
+            background: #e9f5e9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .correct {
+            color: #27ae60;
+        }
+
+        .incorrect {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Quiz Results</h1>
+
+    <a href="/"><h3>Back Home</h3></a>
+
+
+    <div class="score">
+        Your Score: {{ score }} out of {{ total }} ({{ percentage }}%)
+    </div>
+
+    {% for result in results %}
+        {% if result.is_correct %}
+            <div class="question-result-correct">
+        {% else %}
+            <div class="question-result-incorrect">
+        {% endif %}
+            <p><strong>Question {{ loop.index }}:</strong> {{ result.question }}</p>
+            <p><strong>Your Answer:</strong> {{ result.user_answer }} {% if result.is_correct %}<span class="correct">✔️</span>{% else %}<span class="incorrect">❌</span>{% endif %}</p>
+            {% if not result.is_correct %}
+                <p><strong>Correct Answer:</strong> {{ result.correct_answer }}</p>
+                <p><strong>AI Explanation:</strong></p>
+                {{ result.explanation.replace('\n', '<br>') | safe }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    <p>Disclaimer: The AI-generated explanations may contain inaccuracies or misleading details. Please verify important information through additional sources.</p>
+    <p>Ryan L 2024</p>
+</div>
+</body>
+</html>
