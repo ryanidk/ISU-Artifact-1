@@ -22,6 +22,8 @@ def round_4(value):
 
 def generate_options(correct_answer):
     options = [correct_answer]
+    if correct_answer % 1 == 0:
+        options = [int(correct_answer)]
     while len(options) < 4:
         deviation = random.uniform(-0.5, 0.5) * correct_answer if correct_answer != 0 else random.uniform(1, 5)
         wrong_answer = round(correct_answer + deviation, 2)
