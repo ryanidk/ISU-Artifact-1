@@ -7,5 +7,3 @@ This website is a simple calculator for shapes, featuring many 2D and 3D shapes,
 
 Written in Python + Flask, and frontend UI is simple HTML/CSS/JS. Run using Gunicorn on a free Oracle Cloud infrastructure instance with 2 Ampere A1 ARM vCPUs and 12GB of RAM.
 
-## TODO
-- [ ] Add surface area and perimeter to the quiz???
