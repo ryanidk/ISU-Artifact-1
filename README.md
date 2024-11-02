@@ -2,8 +2,8 @@
 
 ### [Access the website here](https://isu-artifact-1.ryanidk.com/)
 
-This is the code I wrote for the 1st ISU, on the topics of volume relationships, measurement calculations in three dimensions, and effects of changing dimensions. 
-This website is a simple calculator for shapes, featuring many 2D and 3D shapes, as well as a pythagorean theorem calculator for right triangles. The 2D shape calculators calculate both area and perimeter (circumference for circles), the 3D shape calculators calculate both surface area and volume, and the pythagorean theorem calculator calculates both the hypotenuse and unknown side (with hypotenuse and other side).
+This code is for my first ISU artifact, focusing on volume relationships, measurement calculations in three dimensions, and the effects of changing dimensions. This website functions mainly as a calculator with an AI-powered explainer for various shapes, including 2D and 3D figures and a Pythagorean theorem calculator for right triangles. The 2D calculators find both the area and perimeter (or circumference for circles), while the 3D calculators find the surface area and volume of the shapes. The Pythagorean theorem calculator finds the hypotenuse and an unknown side of the triangle.
 
-Written in Python + Flask, and frontend UI is simple HTML/CSS/JS. Run using Gunicorn on a free Oracle Cloud infrastructure instance with 2 Ampere A1 ARM vCPUs and 12GB of RAM.
+The website also features a multiple-choice quiz which allows users to choose their quiz length and difficulty level. Questions are based on volume and area calculations, including working backwards (but does not include surface area or perimeter as they require more data). At the end, the user can review their results, and for any incorrect answers, they can receive AI-generated explanations on how to solve the questions.
 
+This project is built with Python and Flask for the backend, with a HTML/CSS/JS frontend. It is run using Gunicorn on a free Oracle Cloud Ampere A1 instance. The AI functions are powered by Llama 3.1 8B, running on Groq cloud.
