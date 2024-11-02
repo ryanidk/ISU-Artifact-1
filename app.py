@@ -60,127 +60,84 @@ def generate_quiz(num_questions, difficulty):
 
 def generate_question(shape):
     working_backward = random.random() < 0.3
-    problem_type = random.choice(['volume', 'surface_area'])
     question = {}
     correct_answer = None
     formula = ''
 
     if shape == 'cube':
         side = random.randint(1, 10)
-        if problem_type == 'volume':
-            formula = 'V = s³'
-            if working_backward:
-                volume = side ** 3
-                question_text = f"A cube has a volume of {volume}. What is the length of one side?"
-                correct_answer = side
-            else:
-                question_text = f"A cube has sides of length {side}. What is its volume?"
-                correct_answer = side ** 3
+        formula = 'V = s³'
+        if working_backward:
+            volume = side ** 3
+            question_text = f"A cube has a volume of {volume}. What is the length of one side?"
+            correct_answer = side
         else:
-            formula = 'SA = 6s²'
-            if working_backward:
-                surface_area = 6 * side ** 2
-                question_text = f"A cube has a surface area of {surface_area}. What is the length of one side?"
-                correct_answer = side
-            else:
-                question_text = f"A cube has sides of length {side}. What is its surface area?"
-                correct_answer = 6 * side ** 2
+            question_text = f"A cube has sides of length {side}. What is its volume?"
+            correct_answer = side ** 3
 
     elif shape == 'cylinder':
         radius = random.randint(1, 10)
         height = random.randint(1, 10)
-        if problem_type == 'volume':
-            formula = 'V = π r² h'
-            if working_backward:
-                volume = round(math.pi * radius ** 2 * height, 2)
-                question_text = f"A cylinder has a volume of {volume}. Its radius is {radius}. What is its height? (Use π ≈ 3.14)"
-                correct_answer = height
-            else:
-                question_text = f"A cylinder has a radius of {radius} and a height of {height}. What is its volume? (Use π ≈ 3.14)"
-                correct_answer = round(math.pi * radius ** 2 * height, 2)
+        formula = 'V = π r² h'
+        if working_backward:
+            volume = round(math.pi * radius ** 2 * height, 2)
+            question_text = f"A cylinder has a volume of {volume}. Its radius is {radius}. What is its height? (Use π ≈ 3.14)"
+            correct_answer = height
         else:
-            formula = 'SA = 2πr(r + h)'
-            if working_backward:
-                surface_area = round(2 * math.pi * radius * (radius + height), 2)
-                question_text = f"A cylinder has a surface area of {surface_area}. Its radius is {radius}. What is its height? (Use π ≈ 3.14)"
-                correct_answer = height
-            else:
-                question_text = f"A cylinder has a radius of {radius} and a height of {height}. What is its surface area? (Use π ≈ 3.14)"
-                correct_answer = round(2 * math.pi * radius * (radius + height), 2)
+            question_text = f"A cylinder has a radius of {radius} and a height of {height}. What is its volume? (Use π ≈ 3.14)"
+            correct_answer = round(math.pi * radius ** 2 * height, 2)
 
     elif shape == 'cone':
         radius = random.randint(1, 10)
         height = random.randint(1, 10)
-        slant_height = round(math.sqrt(radius ** 2 + height ** 2), 2)
-        if problem_type == 'volume':
-            formula = 'V = (1/3) π r² h'
-            if working_backward:
-                volume = round((math.pi * radius ** 2 * height) / 3, 2)
-                question_text = f"A cone has a volume of {volume} and a radius of {radius}. What is its height? (Use π ≈ 3.14)"
-                correct_answer = height
-            else:
-                question_text = f"A cone has a radius of {radius} and a height of {height}. What is its volume? (Use π ≈ 3.14)"
-                correct_answer = round((math.pi * radius ** 2 * height) / 3, 2)
+        formula = 'V = (1/3) π r² h'
+        if working_backward:
+            volume = round((math.pi * radius ** 2 * height) / 3, 2)
+            question_text = f"A cone has a volume of {volume} and a radius of {radius}. What is its height? (Use π ≈ 3.14)"
+            correct_answer = height
         else:
-            formula = 'SA = πr(r + l)'
-            if working_backward:
-                surface_area = round(math.pi * radius * (radius + slant_height), 2)
-                question_text = f"A cone has a surface area of {surface_area} and a radius of {radius}. What is its slant height? (Use π ≈ 3.14)"
-                correct_answer = slant_height
-            else:
-                question_text = f"A cone has a radius of {radius} and a slant height of {slant_height}. What is its surface area? (Use π ≈ 3.14)"
-                correct_answer = round(math.pi * radius * (radius + slant_height), 2)
+            question_text = f"A cone has a radius of {radius} and a height of {height}. What is its volume? (Use π ≈ 3.14)"
+            correct_answer = round((math.pi * radius ** 2 * height) / 3, 2)
 
     elif shape == 'trianglePrism':
         base = random.randint(1, 10)
         height_base = random.randint(1, 10)
         length = random.randint(1, 10)
-        area_base = 0.5 * base * height_base
-        side_c = math.hypot(base, height_base)
-        perimeter_base = base + height_base + side_c
-        if problem_type == 'volume':
-            formula = 'V = (1/2) × base × height × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A triangular prism has a volume of {volume}. The base of the triangle is {base}, and the height of the triangle is {height_base}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A triangular prism has a triangle base with base {base} and height {height_base}, and a length of {length}. What is its volume?"
-                correct_answer = area_base * length
+        formula = 'V = (1/2) × base × height × length'
+        if working_backward:
+            volume = 0.5 * base * height_base * length
+            question_text = f"A triangular prism has a volume of {volume}. The base of the triangle is {base}, and the height of the triangle is {height_base}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A triangular prism has a surface area of {round(surface_area, 2)}, base sides {base}, {height_base}, and {round(side_c, 2)}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A triangular prism has base sides {base}, {height_base}, and {round(side_c, 2)}, and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A triangular prism has a triangle base with base {base} and height {height_base}, and a length of {length}. What is its volume?"
+            correct_answer = 0.5 * base * height_base * length
 
     elif shape == 'rectanglePrism':
         length_val = random.randint(1, 10)
         width = random.randint(1, 10)
         height = random.randint(1, 10)
-        if problem_type == 'volume':
-            formula = 'V = length × width × height'
-            if working_backward:
-                volume = length_val * width * height
-                question_text = f"A rectangular prism has a volume of {volume}. The width is {width} and the height is {height}. What is its length?"
-                correct_answer = length_val
-            else:
-                question_text = f"A rectangular prism has dimensions length {length_val}, width {width}, and height {height}. What is its volume?"
-                correct_answer = length_val * width * height
+        formula = 'V = length × width × height'
+        if working_backward:
+            volume = length_val * width * height
+            question_text = f"A rectangular prism has a volume of {volume}. The width is {width} and the height is {height}. What is its length?"
+            correct_answer = length_val
         else:
-            formula = 'SA = 2(lw + lh + wh)'
-            if working_backward:
-                surface_area = 2 * (length_val * width + length_val * height + width * height)
-                question_text = f"A rectangular prism has a surface area of {surface_area}, width {width}, and height {height}. What is its length?"
-                correct_answer = length_val
-            else:
-                surface_area = 2 * (length_val * width + length_val * height + width * height)
-                question_text = f"A rectangular prism has dimensions length {length_val}, width {width}, and height {height}. What is its surface area?"
-                correct_answer = surface_area
+            question_text = f"A rectangular prism has dimensions length {length_val}, width {width}, and height {height}. What is its volume?"
+            correct_answer = length_val * width * height
+
+    elif shape == 'rhombusPrism':
+        p = random.randint(1, 10)
+        q = random.randint(1, 10)
+        length = random.randint(1, 10)
+        area_base = (p * q) / 2
+        formula = 'V = (p × q) / 2 × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A rhombus prism has a volume of {volume}, with diagonals {p} and {q} in the base rhombus. What is the length of the prism?"
+            correct_answer = length
+        else:
+            question_text = f"A rhombus prism has diagonals {p} and {q} in the base rhombus, and a length of {length}. What is its volume?"
+            correct_answer = area_base * length
 
     elif shape == 'trapeziumPrism':
         a = random.randint(1, 10)
@@ -188,333 +145,172 @@ def generate_question(shape):
         height_base = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = 0.5 * (a + b) * height_base
-        # Assuming sides c and d for the trapezium base
-        c = random.randint(1, 10)
-        d = random.randint(1, 10)
-        perimeter_base = a + b + c + d
-        if problem_type == 'volume':
-            formula = 'V = (1/2)(a + b) × height × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A trapezium prism has a volume of {volume}, bases of lengths {a} and {b}, and a height of {height_base} in the base trapezium. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A trapezium prism has bases {a} and {b}, height {height_base} in the base trapezium, and length {length}. What is its volume?"
-                correct_answer = area_base * length
+        formula = 'V = (1/2)(a + b) × height × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A trapezium prism has a volume of {volume}, bases of lengths {a} and {b}, and a height of {height_base} in the base trapezium. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A trapezium prism has a surface area of {round(surface_area, 2)}. The bases are {a} and {b}, sides {c} and {d}, and height {height_base} in the base trapezium. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A trapezium prism has bases {a} and {b}, sides {c} and {d}, height {height_base} in the base trapezium, and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A trapezium prism has bases {a} and {b}, height {height_base} in the base trapezium, and length {length}. What is its volume?"
+            correct_answer = area_base * length
 
     elif shape == 'parallelogramPrism':
         base = random.randint(1, 10)
-        side = random.randint(1, 10)
         height_base = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = base * height_base
-        perimeter_base = 2 * (base + side)
-        if problem_type == 'volume':
-            formula = 'V = base × height × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A parallelogram prism has a volume of {volume}, base {base}, and height {height_base} in the base parallelogram. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A parallelogram prism has base {base}, height {height_base} in the base parallelogram, and length {length}. What is its volume?"
-                correct_answer = area_base * length
+        formula = 'V = base × height × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A parallelogram prism has a volume of {volume}, base {base}, and height {height_base} in the base parallelogram. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A parallelogram prism has a surface area of {round(surface_area, 2)}. Base {base}, side {side}, height {height_base} in the base parallelogram. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A parallelogram prism has base {base}, side {side}, height {height_base} in the base parallelogram, and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A parallelogram prism has base {base}, height {height_base} in the base parallelogram, and length {length}. What is its volume?"
+            correct_answer = area_base * length
 
     elif shape == 'pentagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = (5 / 4) * side ** 2 * (1 / math.tan(math.pi / 5))
-        perimeter_base = 5 * side
-        if problem_type == 'volume':
-            formula = 'V = [(5 × side²) / (4 × tan(π/5))] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A pentagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A pentagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [(5 × side²) / (4 × tan(π/5))] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A pentagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A pentagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A pentagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A pentagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'hexagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = (3 * math.sqrt(3) * side ** 2) / 2
-        perimeter_base = 6 * side
-        if problem_type == 'volume':
-            formula = 'V = [(3√3 × side²) / 2] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A hexagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A hexagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [(3√3 × side²) / 2] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A hexagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A hexagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A hexagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A hexagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'heptagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = (7 / 4) * side ** 2 * (1 / math.tan(math.pi / 7))
-        perimeter_base = 7 * side
-        if problem_type == 'volume':
-            formula = 'V = [(7 × side²) / (4 × tan(π/7))] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A heptagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A heptagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [(7 × side²) / (4 × tan(π/7))] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A heptagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A heptagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A heptagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A heptagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'octagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = 2 * (1 + math.sqrt(2)) * side ** 2
-        perimeter_base = 8 * side
-        if problem_type == 'volume':
-            formula = 'V = [2(1 + √2) × side²] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"An octagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"An octagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [2(1 + √2) × side²] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"An octagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"An octagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"An octagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"An octagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'nonagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = (9 / 4) * side ** 2 * (1 / math.tan(math.pi / 9))
-        perimeter_base = 9 * side
-        if problem_type == 'volume':
-            formula = 'V = [(9 × side²) / (4 × tan(π/9))] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A nonagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A nonagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [(9 × side²) / (4 × tan(π/9))] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A nonagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A nonagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A nonagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A nonagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'decagonPrism':
         side = random.randint(1, 10)
         length = random.randint(1, 10)
         area_base = (5 * side ** 2) * (1 / math.tan(math.pi / 10))
-        perimeter_base = 10 * side
-        if problem_type == 'volume':
-            formula = 'V = [(5 × side²) / tan(π/10)] × length'
-            if working_backward:
-                volume = area_base * length
-                question_text = f"A decagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                question_text = f"A decagonal prism has base side length {side} and length {length}. What is its volume?"
-                correct_answer = round(area_base * length, 2)
+        formula = 'V = [(5 × side²) / tan(π/10)] × length'
+        if working_backward:
+            volume = area_base * length
+            question_text = f"A decagonal prism has a volume of {round(volume, 2)} and base side length {side}. What is the length of the prism?"
+            correct_answer = length
         else:
-            formula = 'SA = (perimeter_base × length) + (2 × area_base)'
-            if working_backward:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A decagonal prism has a surface area of {round(surface_area, 2)} and base side length {side}. What is the length of the prism?"
-                correct_answer = length
-            else:
-                surface_area = (perimeter_base * length) + (2 * area_base)
-                question_text = f"A decagonal prism has base side length {side} and length {length}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A decagonal prism has base side length {side} and length {length}. What is its volume?"
+            correct_answer = round(area_base * length, 2)
 
     elif shape == 'trianglePyramid':
         side = random.randint(1, 10)
         height = random.randint(1, 10)
         area_base = (math.sqrt(3) / 4) * side ** 2
-        slant_height = round(math.sqrt(height ** 2 + (side / (2 * math.tan(math.radians(30)))) ** 2), 2)
-        if problem_type == 'volume':
-            formula = 'V = [(√3 / 4) × side² × height] / 3'
-            if working_backward:
-                volume = (area_base * height) / 3
-                question_text = f"A triangular pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A triangular pyramid has base side length {side} and height {height}. What is its volume?"
-                correct_answer = round((area_base * height) / 3, 2)
+        formula = 'V = [(√3 / 4) × side² × height] / 3'
+        if working_backward:
+            volume = (area_base * height) / 3
+            question_text = f"A triangular pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
+            correct_answer = height
         else:
-            formula = 'SA = area_base + (1/2) × perimeter_base × slant_height'
-            perimeter_base = 3 * side
-            surface_area = area_base + 0.5 * perimeter_base * slant_height
-            if working_backward:
-                question_text = f"A triangular pyramid has a surface area of {round(surface_area, 2)} and base side length {side}. What is its slant height?"
-                correct_answer = slant_height
-            else:
-                question_text = f"A triangular pyramid has base side length {side} and slant height {slant_height}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A triangular pyramid has base side length {side} and height {height}. What is its volume?"
+            correct_answer = round((area_base * height) / 3, 2)
 
     elif shape == 'squarePyramid':
         side = random.randint(1, 10)
         height = random.randint(1, 10)
-        slant_height = round(math.sqrt((side / 2) ** 2 + height ** 2), 2)
         area_base = side ** 2
-        if problem_type == 'volume':
-            formula = 'V = (side² × height) / 3'
-            if working_backward:
-                volume = (area_base * height) / 3
-                question_text = f"A square pyramid has a volume of {volume} and base side length {side}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A square pyramid has base side length {side} and height {height}. What is its volume?"
-                correct_answer = (area_base * height) / 3
+        formula = 'V = (side² × height) / 3'
+        if working_backward:
+            volume = (area_base * height) / 3
+            question_text = f"A square pyramid has a volume of {volume} and base side length {side}. What is its height?"
+            correct_answer = height
         else:
-            formula = 'SA = side² + 2 × side × slant_height'
-            surface_area = area_base + 2 * side * slant_height
-            if working_backward:
-                question_text = f"A square pyramid has a surface area of {round(surface_area, 2)} and base side length {side}. What is its slant height?"
-                correct_answer = slant_height
-            else:
-                question_text = f"A square pyramid has base side length {side} and slant height {slant_height}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A square pyramid has base side length {side} and height {height}. What is its volume?"
+            correct_answer = (area_base * height) / 3
 
     elif shape == 'pentagonPyramid':
         side = random.randint(1, 10)
         height = random.randint(1, 10)
         area_base = (5 / 4) * side ** 2 * (1 / math.tan(math.pi / 5))
-        apothem = side / (2 * math.tan(math.pi / 5))
-        slant_height = round(math.sqrt(height ** 2 + apothem ** 2), 2)
-        perimeter_base = 5 * side
-        if problem_type == 'volume':
-            formula = 'V = [(5 × side²) / (4 × tan(π/5)) × height] / 3'
-            if working_backward:
-                volume = (area_base * height) / 3
-                question_text = f"A pentagonal pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A pentagonal pyramid has base side length {side} and height {height}. What is its volume?"
-                correct_answer = round((area_base * height) / 3, 2)
+        formula = 'V = [(5 × side²) / (4 × tan(π/5)) × height] / 3'
+        if working_backward:
+            volume = (area_base * height) / 3
+            question_text = f"A pentagonal pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
+            correct_answer = height
         else:
-            formula = 'SA = area_base + (1/2) × perimeter_base × slant_height'
-            surface_area = area_base + 0.5 * perimeter_base * slant_height
-            if working_backward:
-                question_text = f"A pentagonal pyramid has a surface area of {round(surface_area, 2)} and base side length {side}. What is its slant height?"
-                correct_answer = slant_height
-            else:
-                question_text = f"A pentagonal pyramid has base side length {side} and slant height {slant_height}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A pentagonal pyramid has base side length {side} and height {height}. What is its volume?"
+            correct_answer = round((area_base * height) / 3, 2)
 
     elif shape == 'hexagonPyramid':
         side = random.randint(1, 10)
         height = random.randint(1, 10)
         area_base = (3 * math.sqrt(3) * side ** 2) / 2
-        apothem = side / (2 * math.tan(math.pi / 6))
-        slant_height = round(math.sqrt(height ** 2 + apothem ** 2), 2)
-        perimeter_base = 6 * side
-        if problem_type == 'volume':
-            formula = 'V = [(3√3 × side²) / 2 × height] / 3'
-            if working_backward:
-                volume = (area_base * height) / 3
-                question_text = f"A hexagonal pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A hexagonal pyramid has base side length {side} and height {height}. What is its volume?"
-                correct_answer = round((area_base * height) / 3, 2)
+        formula = 'V = [(3√3 × side²) / 2 × height] / 3'
+        if working_backward:
+            volume = (area_base * height) / 3
+            question_text = f"A hexagonal pyramid has a volume of {round(volume, 2)} and base side length {side}. What is its height?"
+            correct_answer = height
         else:
-            formula = 'SA = area_base + (1/2) × perimeter_base × slant_height'
-            surface_area = area_base + 0.5 * perimeter_base * slant_height
-            if working_backward:
-                question_text = f"A hexagonal pyramid has a surface area of {round(surface_area, 2)} and base side length {side}. What is its slant height?"
-                correct_answer = slant_height
-            else:
-                question_text = f"A hexagonal pyramid has base side length {side} and slant height {slant_height}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A hexagonal pyramid has base side length {side} and height {height}. What is its volume?"
+            correct_answer = round((area_base * height) / 3, 2)
 
     elif shape == 'rectanglePyramid':
         length_val = random.randint(1, 10)
         width = random.randint(1, 10)
         height = random.randint(1, 10)
         area_base = length_val * width
-        slant_height_length = round(math.sqrt((width / 2) ** 2 + height ** 2), 2)
-        slant_height_width = round(math.sqrt((length_val / 2) ** 2 + height ** 2), 2)
-        if problem_type == 'volume':
-            formula = 'V = (length × width × height) / 3'
-            if working_backward:
-                volume = (area_base * height) / 3
-                question_text = f"A rectangular pyramid has a volume of {volume}, base length {length_val}, and base width {width}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A rectangular pyramid has base length {length_val}, base width {width}, and height {height}. What is its volume?"
-                correct_answer = (area_base * height) / 3
+        formula = 'V = (length × width × height) / 3'
+        if working_backward:
+            volume = (area_base * height) / 3
+            question_text = f"A rectangular pyramid has a volume of {volume}, base length {length_val}, and base width {width}. What is its height?"
+            correct_answer = height
         else:
-            formula = 'SA = area_base + length × slant_height_length + width × slant_height_width'
-            surface_area = area_base + length_val * slant_height_length + width * slant_height_width
-            if working_backward:
-                question_text = f"A rectangular pyramid has a surface area of {round(surface_area, 2)}. Base length {length_val}, base width {width}, and slant heights {slant_height_length} and {slant_height_width}. What is its height?"
-                correct_answer = height
-            else:
-                question_text = f"A rectangular pyramid has base length {length_val}, base width {width}, slant heights {slant_height_length} and {slant_height_width}. What is its surface area?"
-                correct_answer = round(surface_area, 2)
+            question_text = f"A rectangular pyramid has base length {length_val}, base width {width}, and height {height}. What is its volume?"
+            correct_answer = (area_base * height) / 3
 
     elif shape == 'circle':
         radius = random.randint(1, 10)
