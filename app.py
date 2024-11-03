@@ -22,8 +22,6 @@ def round_4(value):
 
 def generate_options(correct_answer):
     options = [correct_answer]
-    if correct_answer % 1 == 0:
-        options = [int(correct_answer)]
     while len(options) < 4:
         deviation = random.uniform(-0.5, 0.5) * correct_answer if correct_answer != 0 else random.uniform(1, 5)
         wrong_answer = round(correct_answer + deviation, 2)
@@ -478,6 +476,9 @@ def generate_question(shape):
     if isinstance(correct_answer, float):
         correct_answer = round(correct_answer, 2)
 
+    if correct_answer % 1 == 0:
+        correct_answer = int(correct_answer)
+
     options = generate_options(correct_answer)
     question = {
         'question': question_text,
@@ -503,6 +504,9 @@ def generate_pythagorean():
         question_text = f"In a right-angled triangle, the hypotenuse is {c} and one side is {a}. What is the length of the other side?"
         correct_answer = b
         formula = 'b = √(hypotenuse² - a²)'
+
+    if correct_answer % 1 == 0:
+        correct_answer = int(correct_answer)
 
     options = generate_options(correct_answer)
     question = {
